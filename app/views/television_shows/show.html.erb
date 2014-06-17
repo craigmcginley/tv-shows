@@ -10,10 +10,12 @@
 </div>
 
 <h4>Add a Character:</h4>
+
 <%= form_for [@television_show, @character] do |f| %>
+
   <% if @character.errors.any? %>
     <ul>
-      <% @characters.errors.full_messages.each do |msg| %>
+      <% @character.errors.full_messages.each do |msg| %>
         <li><%= msg %></li>
       <% end %>
     </ul>
@@ -21,8 +23,8 @@
 
   <%= f.label :character_name %>
   <%= f.text_field :character_name %><br>
-  <%= f.label :actor_name %>
-  <%= f.text_field :actor_name %><br>
+  <%= f.label :actor %>
+  <%= f.collection_select :actor_id, Actor.all, :id, :name %><br>
   <%= f.label :description %>
   <%= f.text_field :description %><br>
   <%= f.submit %>
@@ -33,8 +35,8 @@
 <% else %>
   <ul>
     <% @television_show.characters.each do |char| %>
-      <li><%= char.character_name %>, played by <%= char.actor_name %><br>
-      <%= char.description %></li>
+      <li><%= char.character_name %>, played by <%= char.actor.name %><br>
+      <%= char.description %><%= link_to 'Delete Character', character_path(char), method: :delete %></li>
     <% end %>
   </ul>
 <% end %>

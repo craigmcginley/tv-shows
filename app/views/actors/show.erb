@@ -1,0 +1,8 @@
+<h3><%= @actor.name %></h3>
+
+<h4>Roles:</h4>
+<ul>
+  <% @characters.each do |char| %>
+    <li><%= char.character_name %> - <%= char.television_show.title %></li>
+  <% end %>
+</ul>

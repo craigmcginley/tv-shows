@@ -4,4 +4,5 @@ class TelevisionShow < ActiveRecord::Base
     uniqueness: { scope: :network }
 
   has_many :characters
+  has_many :actors, through: :characters
 end
