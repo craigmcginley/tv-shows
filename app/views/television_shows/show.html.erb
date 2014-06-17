@@ -8,3 +8,34 @@
 <div>
   <%= @television_show.synopsis %>
 </div>
+
+<h4>Add a Character:</h4>
+<%= form_for [@television_show, @character] do |f| %>
+  <% if @character.errors.any? %>
+    <ul>
+      <% @characters.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+    </ul>
+  <% end %>
+
+  <%= f.label :character_name %>
+  <%= f.text_field :character_name %><br>
+  <%= f.label :actor_name %>
+  <%= f.text_field :actor_name %><br>
+  <%= f.label :description %>
+  <%= f.text_field :description %><br>
+  <%= f.submit %>
+<% end %>
+
+<% if @television_show.characters.empty? %>
+  <p>No characters added for this show yet.</p>
+<% else %>
+  <ul>
+    <% @television_show.characters.each do |char| %>
+      <li><%= char.character_name %>, played by <%= char.actor_name %><br>
+      <%= char.description %></li>
+    <% end %>
+  </ul>
+<% end %>
+
